@@ -52,7 +52,7 @@ User ID (PUID) and Group ID (PGID) can be found by issuing the following command
 id <username>
 ```
 ___
-If you appreciate my work, then please consider buying me a beer  :D
+If you appreciate this work, then please consider buying binhex a beer as he did all the work! :D
 
 [![PayPal donation](https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MM5E27UX6AUU4)
 
