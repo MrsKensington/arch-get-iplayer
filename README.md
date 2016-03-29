@@ -16,12 +16,13 @@ docker run -d \
     --name=<container name> \
     -e SCHEDULE=<XXd|h|m|s> \
     -e SHOWS=<comma seperated show names> \
+    -e TYPES=<comma seperated list of types (liveradio,livetv,radio,tv,all). tv is default> \
     -v <path for data files>:/data \
     -v <path for config files>:/config \
     -v /etc/localtime:/etc/localtime:ro \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
-    binhex/arch-get-iplayer
+    mrskensington/arch-get-iplayer
 ```
 
 Please replace all user variables in the above command defined by <> with the correct values.
@@ -41,7 +42,7 @@ docker run -d \
     -v /etc/localtime:/etc/localtime:ro \
     -e PUID=0 \
     -e PGID=0 \
-    binhex/arch-get-iplayer
+    mrskensington/arch-get-iplayer
 ```
 
 **Notes**
@@ -52,7 +53,7 @@ User ID (PUID) and Group ID (PGID) can be found by issuing the following command
 id <username>
 ```
 ___
-If you appreciate this work, then please consider buying binhex a beer as he did all the work! :D
+If you appreciate this work, then please consider buying binhex a beer as they did all the work! :D
 
 [![PayPal donation](https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MM5E27UX6AUU4)
 
