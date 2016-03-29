@@ -13,6 +13,7 @@ else
 fi
 
 TYPES=${TYPES:=tv}
+MODES=${MODES:=flashhd,flashvhigh,flashhigh,flashstd,flashnormal,flashlow,flashaaclow,flashaacstd,hlsaaclow,hlsaacstd}
 
 # set umask to 000 (permissions octal is then 777 for dir, 666 for files)
 umask 000
@@ -43,7 +44,7 @@ do
 		
 		echo "[info] Running get_iplayer..."
 		# run get_iplayer for show, saving to incomplete folder
-		/usr/bin/get_iplayer --type=${TYPES} --profile-dir /config --get --nopurge --modes=flashhd,flashvhigh,flashhigh,flashstd,flashnormal,flashlow --file-prefix="${show_name} - <senum> - <episodeshort>" "${show_name}" --output "/data/get_iplayer/incomplete/${show_name}"
+		/usr/bin/get_iplayer --type=${TYPES} --profile-dir /config --get --nopurge --modes="${MODES}" --file-prefix="${show_name} - <senum> - <episodeshort>" "${show_name}" --output "/data/get_iplayer/incomplete/${show_name}"
 
 	done
 
