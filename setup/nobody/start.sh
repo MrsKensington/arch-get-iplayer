@@ -15,9 +15,6 @@ fi
 TYPES=${TYPES:=tv}
 MODES=${MODES:=flashhd,flashvhigh,flashhigh,flashstd,flashnormal,flashlow,flashaaclow,flashaacstd,hlsaaclow,hlsaacstd}
 
-# set umask to 000 (permissions octal is then 777 for dir, 666 for files)
-umask 000
-
 # split comma seperated string into list from SHOW env variable
 IFS=',' read -ra SHOWLIST <<< "${SHOWS}"
 
@@ -36,20 +33,20 @@ do
 
 		# strip whitespace from start and end of show_name
 		show_name=$(echo "${show_name}" | sed -e 's/^[ \t]*//')
-		
+
 		echo "[info] Processing show ${show_name}..."
 
 		echo "[info] Delete partial downloads from incomplete folder..."
 		find /data/get_iplayer/incomplete/ -type f -name "*partial*" -delete
-		
+
 		echo "[info] Running get_iplayer..."
 		# run get_iplayer for show, saving to incomplete folder
-		/usr/bin/get_iplayer --type=${TYPES} --profile-dir /config --get --nopurge --modes="${MODES}" --file-prefix="${show_name} - <senum> - <episodeshort>" "${show_name}" --output "/data/get_iplayer/incomplete/${show_name}"
+		/usr/bin/get_iplayer --profile-dir /config --get --nopurge --modes=flashhd,flashvhigh,flashhigh,flashstd,flashnormal,flashlow --file-prefix="${show_name} - <senum> - <episodeshort>" "${show_name}" --output "/data/get_iplayer/incomplete/${show_name}"
 
 	done
 
-	# check incomplete folder DOES contain files with flv extension
-	if [[ -n $(find /data/get_iplayer/incomplete/ -name '*.flv') ]]; then
+	# check incomplete folder DOES contain files with mp4 extension
+	if [[ -n $(find /data/get_iplayer/incomplete/ -name '*.mp4') ]]; then
 
 		echo "[info] Copying show folders in incomplete to completed..."
 		cp -rf "/data/get_iplayer/incomplete"/* "/data/completed/"
@@ -59,19 +56,23 @@ do
 
 			echo "[info] Copy succesful, deleting incoomplete folders..."
 			rm -rf "/data/get_iplayer/incomplete"/*
+
 		else
+
 			echo "[error] Copy failed, skipping deletion of show folders in incoomplete folder..."
+
 		fi
 
 	fi
 
 	# if env variable SCHEDULE not defined then use default
 	if [[ -z "${SCHEDULE}" ]]; then
-	
+
 		echo "[info] Env var SCHEDULE not defined, sleeping for 12 hours..."
 		sleep 12h
 
 	else
+
 		echo "[info] Env var SCHEDULE defined, sleeping for ${SCHEDULE}..."
 		sleep "${SCHEDULE}"
 
