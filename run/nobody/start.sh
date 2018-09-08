@@ -32,7 +32,7 @@ do
 	for show_name in "${SHOWLIST[@]}"; do
 
 		# strip whitespace from start and end of show_name
-		show_name=$(echo "${show_name}" | sed -e 's/^[ \t]*//')
+		show_name=$(echo "${show_name}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
 
 		echo "[info] Processing show ${show_name}..."
 
@@ -51,15 +51,15 @@ do
 		echo "[info] Copying show folders in incomplete to completed..."
 		cp -rf "/data/get_iplayer/incomplete"/* "/data/completed/"
 
-		# if copy succesful then delete show folder in incomplete folder
+		# if copy successful then delete show folder in incomplete folder
 		if [[ $? -eq 0 ]]; then
 
-			echo "[info] Copy succesful, deleting incoomplete folders..."
+			echo "[info] Copy successful, deleting incomplete folders..."
 			rm -rf "/data/get_iplayer/incomplete"/*
 
 		else
 
-			echo "[error] Copy failed, skipping deletion of show folders in incoomplete folder..."
+			echo "[error] Copy failed, skipping deletion of show folders in incomplete folder..."
 
 		fi
 
